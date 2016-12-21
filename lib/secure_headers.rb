@@ -266,6 +266,7 @@ module SecureHeaders
     #
     # Returns the nonce
     def content_security_policy_nonce(request, script_or_style)
+      puts caller
       request.env[NONCE_KEY] ||= SecureRandom.base64(32).chomp
       nonce_key = script_or_style == ContentSecurityPolicy::SCRIPT_SRC ? :script_nonce : :style_nonce
       append_content_security_policy_directives(request, nonce_key => request.env[NONCE_KEY])
